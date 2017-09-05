@@ -22,13 +22,13 @@ io.on('connection', (socket) => {
 		console.log("User disconnected");
 	})
 
-	socket.on('createEmail', (email) => {
-		console.log("Create Email", email);
-	})
-
-	socket.emit('newEmail', {
-		text: "New Email",
-		from: "Annonymous"
+	socket.on('createMessage', (message) => {
+		console.log("createMessage", message);
+		io.emit('newMessage', {
+			from: message.from,
+			text: message.text,
+			createdAt: new Date().getTime()
+		})
 	})
 })
 
