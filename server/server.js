@@ -8,7 +8,7 @@ const http = require('http');
 const app = express();
 
 const publicPath = path.join(__dirname, "/../public");
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3005;
 
 app.use(express.static(publicPath));
 
@@ -17,6 +17,18 @@ var io = socketIO(server);
 
 io.on('connection', (socket) => {
 	console.log("New user connected");
+
+	socket.emit("newMessage", {
+		from: "admin",
+		text: "Welcome to chat app",
+		createdAt: new Date().getTime()
+	})
+
+	socket.broadcast.emit("newMessage", {
+		from: "admin",
+		text: "new user joined",
+		createdAt: new Date().getTime()
+	})
 
 	socket.on('disconnect', () => {
 		console.log("User disconnected");
