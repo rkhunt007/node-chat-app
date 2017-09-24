@@ -9,7 +9,7 @@ const app = express();
 
 const { generateMessage, generateLocationMessage } = require('./utils/message')
 const publicPath = path.join(__dirname, "/../public");
-const PORT = process.env.PORT || 3005;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static(publicPath));
 
@@ -30,7 +30,7 @@ io.on('connection', (socket) => {
 	socket.on('createMessage', (message, callback) => {
 		console.log("createMessage", message);
 		io.emit('newMessage', generateMessage(message.from, message.text));
-		callback("This is from server");
+		callback();
 	})
 
 	socket.on("createLocationMessage", (coords) =>{
