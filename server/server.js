@@ -9,7 +9,7 @@ const app = express();
 
 const { generateMessage, generateLocationMessage } = require('./utils/message')
 const publicPath = path.join(__dirname, "/../public");
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static(publicPath));
 
